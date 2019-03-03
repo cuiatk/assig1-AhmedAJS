@@ -4,6 +4,10 @@
 package turtle;
 
 import java.util.List;
+import java.math.*;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 
 public class TurtleSoup {
@@ -38,7 +42,7 @@ public class TurtleSoup {
      * @return angle in degrees, where 0 <= angle < 360
      */
     public static double calculateRegularPolygonAngle(int sides) {
-        throw new RuntimeException("implement me!");
+    	return (sides - 2) * 180 / sides;
     }
 
     /**
@@ -51,8 +55,8 @@ public class TurtleSoup {
      * @param angle size of interior angles in degrees, where 0 < angle < 180
      * @return the integer number of sides
      */
-    public static int calculatePolygonSidesFromAngle(double angle) {
-        throw new RuntimeException("implement me!");
+    public static long calculatePolygonSidesFromAngle(double angle) {
+    	return Math.round(360/(180-angle));
     }
 
     /**
@@ -64,8 +68,14 @@ public class TurtleSoup {
      * @param sides number of sides of the polygon to draw
      * @param sideLength length of each side
      */
-    public static void drawRegularPolygon(Turtle turtle, int sides, int sideLength) {
-        throw new RuntimeException("implement me!");
+    public static void drawRegularPolygon(double angle, int sides, int sideLength) {
+    	DrawableTurtle turtlePersonel = new DrawableTurtle();
+    	turtlePersonel.draw();
+    	for (int i =0 ; i<sides;i++) {
+    		turtlePersonel.forward(sideLength);
+            turtlePersonel.turn(angle-90);
+    		
+    	}
     }
 
     /**
@@ -89,8 +99,8 @@ public class TurtleSoup {
      */
     public static double calculateHeadingToPoint(double currentHeading, int currentX, int currentY,
                                                  int targetX, int targetY) {
-        throw new RuntimeException("implement me!");
-    }
+    	double calculatedHeading = Math.atan2(targetY-currentY,targetX-currentX);
+        return calculatedHeading;    }
 
     /**
      * Given a sequence of points, calculate the heading adjustments needed to get from each point
@@ -107,6 +117,7 @@ public class TurtleSoup {
      *         otherwise of size (# of points) - 1
      */
     public static List<Double> calculateHeadings(List<Integer> xCoords, List<Integer> yCoords) {
+
         throw new RuntimeException("implement me!");
     }
 
@@ -119,7 +130,26 @@ public class TurtleSoup {
      * @param turtle the turtle context
      */
     public static void drawPersonalArt(Turtle turtle) {
-        throw new RuntimeException("implement me!");
+
+        DrawableTurtle turtlePersonel = new DrawableTurtle();
+    	turtle.forward(90);
+    	turtle.turn(90);
+    	
+    	turtle.forward(90);
+    	turtle.turn(90);
+    	
+    
+    	
+    	
+    	turtle.forward(190);
+    	turtle.turn(90);
+    	
+    	turtle.forward(90);
+    	turtle.turn(90);
+    	turtle.forward(90);
+    	turtle.turn(90);
+    	
+    
     }
 
     /**
@@ -131,11 +161,18 @@ public class TurtleSoup {
      */
     public static void main(String args[]) {
         DrawableTurtle turtle = new DrawableTurtle();
-
+        
+        turtle.draw();
         drawSquare(turtle, 40);
+        
 
         // draw the window
         turtle.draw();
+        double angle =  calculateRegularPolygonAngle(3);
+        drawRegularPolygon(angle,8,100);  
+        
+        double n = calculateHeadingToPoint(0.0,0,0,0,1);
+        System.out.print(n);
     }
 
 }
